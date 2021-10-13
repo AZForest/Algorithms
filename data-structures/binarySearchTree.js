@@ -201,6 +201,7 @@ class BinarySearchTree {
         queue.enqueue(tree);
         let node = queue.dequeue();
         while (node) {
+          console.log(node.value);
           values.push(node.value);
           
           if (node.left) {
@@ -253,4 +254,20 @@ class BinarySearchTree {
           throw new Error("Index out of bounds");
         }
     }
+
+    //Level Order traversal, print each row in separate line
+    levelOrderTraversalIterative(tree) {
+        let queue = new Queue();
+        let node; 
+    }
 }
+
+let bst = new BinarySearchTree();
+bst.insert(1,1);
+bst.insert(2,2);
+bst.insert(3,3);
+bst.insert(4,4);
+bst.insert(5,5);
+bst.insert(6,6);
+bst.insert(7,7);
+bst.bfs(bst);
