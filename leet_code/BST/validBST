@@ -1,0 +1,17 @@
+var isValidBST = function(root) {
+    if (!root) return null;
+    let vals = IOT(root);
+    console.log(vals);
+    for (let i = 1; i < vals.length; i++) {
+        if (vals[i-1] >= vals[i]) return false;
+    }
+    return true;
+    
+}
+
+function IOT(tree, values = []) {
+    if (tree.left) values = IOT(tree.left, values);
+    values.push(tree.val);
+    if (tree.right) values = IOT(tree.right, values);
+    return values;
+}
