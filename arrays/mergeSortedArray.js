@@ -8,31 +8,46 @@
  var merge = function(nums1, m, nums2, n) {
     /*let leftIndex = 0;
     let rightIndex = 0;
-    let result = [];
-    while (leftIndex < m && rightIndex < n) {
-        console.log(nums1[leftIndex], nums2[rightIndex])
-        if (nums1[leftIndex] <= nums2[rightIndex]) {
-            result.push(nums1[leftIndex]);
+    while (rightIndex < n) {
+        while (nums1[leftIndex] < nums2[rightIndex] && leftIndex < m) {
             leftIndex++;
-        } else {
-            result.push(nums2[rightIndex]);
-            rightIndex++;
+        }
+        nums1.splice(leftIndex + 1, 0, nums2[rightIndex]);
+        leftIndex++;
+        rightIndex++;
+    }
+    console.log(nums1.slice(0, nums1.length - n))
+    return nums1;*/
+    
+    if (m === 0) {
+        for (let i = 0; i < n; i++) {
+            nums1[i] = nums2[i]
+        }
+    } else {
+        let leftIndex = m - 1;
+        let rightIndex = n - 1;
+        let currentIndex = m + n - 1;
+        while (rightIndex >= 0 && leftIndex >= 0) {
+            if (nums1[leftIndex] < nums2[rightIndex]) {
+                nums1[currentIndex] = nums2[rightIndex];
+                rightIndex--;
+                currentIndex--;
+            } else {
+                let temp = nums1[currentIndex];
+                nums1[currentIndex] = nums1[leftIndex];
+                nums1[leftIndex] = temp;
+                leftIndex--;
+                currentIndex--;
+            }
+        }
+        if (rightIndex > leftIndex) {
+            while (rightIndex >= 0) {
+                nums1[currentIndex] = nums2[rightIndex];
+                currentIndex--;
+                rightIndex--;
+            }
         }
     }
-    console.log(result);
-    console.log(nums2.slice(rightIndex));
-    result = result.concat(leftIndex < m ? nums1.slice(leftIndex) : nums2.slice(rightIndex));
-    console.log(result);
-    return result;*/
-    let j = 0;
-    let i = 0;
-    while (i < n) {
-        if (nums1[j] < nums2[i]) {
-            continue;
-        } else {
-            nums1[j] = nums2[i];
-            i++;
-        }
-        j++;
-    }
+    
+    //console.log(nums1);
 };
