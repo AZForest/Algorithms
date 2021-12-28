@@ -1,5 +1,54 @@
 var longestPalindrome = function(s) {
-    const subStrings = [];
+    let result = s[0];
+    for (let i = 0; i < s.length - 1; i++) {
+        for (let j = 0; j < s.length; j++) {
+            let sub = s.substring(i, j + 1);
+            if (sub.length % 2 === 0) {
+                if (evenTester(sub)) {
+                    if (sub.length > result.length) {
+                        result = sub;
+                    }
+                }
+            } else {
+                if (oddTester(sub)) {
+                    if (sub.length > result.length) {
+                        result = sub;
+                    }
+                }
+            }
+        }
+    }
+    return result;
+}
+
+function evenTester(string) {
+    let mid = (string.length / 2) - 1;
+    let midPlusOne = mid + 1;
+    while (mid >= 0) {
+        if (string[mid] !== string[midPlusOne]) {
+            return false;
+        }
+        mid--;
+        midPlusOne++;
+    }
+    return true;
+}
+
+function oddTester(string) {
+    if (string.length === 1) return true;
+    let mid = Math.floor(string.length / 2);
+    let midMinus = mid - 1;
+    let midPlus = mid + 1;
+    while (midMinus >= 0) {
+        if(string[midMinus] !== string[midPlus]) {
+            return false;
+        }
+        midMinus--;
+        midPlus++;
+    }
+    return true;
+
+    /*const subStrings = [];
     for (let i = 0; i < s.length; i++) {
         for (let j = i + 1 ; j < s.length + 1; j++) {
             subStrings.push(s.slice(i, j));
@@ -64,6 +113,6 @@ var longestPalindrome = function(s) {
         return max;
     } else {
         return palindromes[0];
-    }
+    }*/
     
 };
