@@ -3,11 +3,11 @@
  * @return {boolean}
  */
  var isPowerOfThree = function(n) {
-    if (n === 0) return false;
-    let answer = n / 3;
-    while (answer / 3 <= 3) {
-        answer = answer / 3;
-        if (answer === 0) return true;
-    }
-    return false;
+    return powrifify(n);
 };
+
+function powrifify(n, result = 1) {
+    if (result > n) return false;
+    if (result === n) return true;
+    return powrifify(n, result * 3);
+}
