@@ -30,7 +30,22 @@ function stringSlicer(S) {
             }
         }
     })
-    console.log(Object.entries(hash).forEach(line => console.log(line)));
+
+    let entries = Object.entries(hash);
+    let sortedEntries = entries.sort((a, b) => {
+        if (b[1] > a[1]) return 1;
+        if (b[1] < a[1]) return -1;
+
+        if (b[0] > a[0]) return -1;
+        if (b[0] < a[0]) return 1;
+        return 0;
+    });
+    let result = "";
+    sortedEntries.forEach(entry => {
+        result += `${entry[1]}: ${entry[0]} \n`;
+
+    })
+    return result;
 }
 
 console.log(stringSlicer('Banana Boat.'));
@@ -42,7 +57,7 @@ function looper(S) {
     let arr = S.split(" ");
     arr.forEach(word => {
         for (let i = 0; i < word.length; i++) {
-            for (let j = 0; j < word.length; j++) {
+            for (let j = i; j < word.length; j++) {
                 let sub;
                 if (j === 0) {
                     sub = word.slice(i, i + 1); 
