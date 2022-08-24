@@ -24,10 +24,8 @@ public class RemoveDuplicatesFromLL {
                 } else {
                     placeholder.next = pointer;
                 }
-                
             }
             return head;
-            
         }
     }
 }
